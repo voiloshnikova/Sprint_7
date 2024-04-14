@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.example.CreateCourierTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.044 s - in org.example.CreateCourierTest

@@ -1,0 +1,5 @@
+org\example\AuthorizationCourierTest.class
+org\example\CreateOrderParameterizedTest.class
+org\example\OrderListTest.class
+org\example\CreateCourierTest.class
+org\example\CreateOrderTest.class

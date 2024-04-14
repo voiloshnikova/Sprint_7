@@ -1,0 +1,15 @@
+org\example\pojo\ExistCourierPostResponsePojo.class
+org\example\pojo\OrderGetBodyResponsePojo.class
+org\example\CourierApi.class
+org\example\pojo\CreateCourierPostBodyResponsePojo.class
+org\example\data\CreateCourierPostBodyData.class
+org\example\pojo\LoginCourierPostBodyRequestPojo.class
+org\example\data\CommonData.class
+org\example\data\CreateOrderPostBodyData.class
+org\example\pojo\CreateOrderPostBodyRequestPojo.class
+org\example\pojo\ExistCourierPostRequestPojo.class
+org\example\pojo\LoginCourierPostBodyResponsePojo.class
+org\example\pojo\CreateCourierPostBodyRequestPojo.class
+org\example\pojo\OrdersListGetBodyResponsePojo.class
+org\example\OrderApi.class
+org\example\pojo\CreateOrderPostBodyResponsePojo.class
