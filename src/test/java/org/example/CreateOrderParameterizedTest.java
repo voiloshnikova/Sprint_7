@@ -1,6 +1,8 @@
 package org.example;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import org.example.data.CommonData;
 import org.example.data.CreateOrderPostBodyData;
@@ -42,31 +44,59 @@ public class CreateOrderParameterizedTest {
     @Parameterized.Parameters
     public static Object[][] testOrderParam() {
         return new Object[][]{
-                {CreateOrderPostBodyData.FIRSTNAME, CreateOrderPostBodyData.LASTNAME,
-                        CreateOrderPostBodyData.ADDRESS, CreateOrderPostBodyData.METRO_STATION, CreateOrderPostBodyData.PHONE,
-                        CreateOrderPostBodyData.RENT_TIME, CreateOrderPostBodyData.DELIVERY_DATE, CreateOrderPostBodyData.COMMENT,
+                {
+                        CreateOrderPostBodyData.FIRSTNAME,
+                        CreateOrderPostBodyData.LASTNAME,
+                        CreateOrderPostBodyData.ADDRESS,
+                        CreateOrderPostBodyData.METRO_STATION,
+                        CreateOrderPostBodyData.PHONE,
+                        CreateOrderPostBodyData.RENT_TIME,
+                        CreateOrderPostBodyData.DELIVERY_DATE,
+                        CreateOrderPostBodyData.COMMENT,
                         CreateOrderPostBodyData.COLOUR_BLACK},
-                {CreateOrderPostBodyData.FIRSTNAME, CreateOrderPostBodyData.LASTNAME,
-                        CreateOrderPostBodyData.ADDRESS, CreateOrderPostBodyData.METRO_STATION, CreateOrderPostBodyData.PHONE,
-                        CreateOrderPostBodyData.RENT_TIME, CreateOrderPostBodyData.DELIVERY_DATE, CreateOrderPostBodyData.COMMENT,
+                {
+                        CreateOrderPostBodyData.FIRSTNAME,
+                        CreateOrderPostBodyData.LASTNAME,
+                        CreateOrderPostBodyData.ADDRESS,
+                        CreateOrderPostBodyData.METRO_STATION,
+                        CreateOrderPostBodyData.PHONE,
+                        CreateOrderPostBodyData.RENT_TIME,
+                        CreateOrderPostBodyData.DELIVERY_DATE,
+                        CreateOrderPostBodyData.COMMENT,
                         CreateOrderPostBodyData.COLOUR_BLACK_AND_GRAY},
-                {CreateOrderPostBodyData.FIRSTNAME, CreateOrderPostBodyData.LASTNAME,
-                        CreateOrderPostBodyData.ADDRESS, CreateOrderPostBodyData.METRO_STATION, CreateOrderPostBodyData.PHONE,
-                        CreateOrderPostBodyData.RENT_TIME, CreateOrderPostBodyData.DELIVERY_DATE, CreateOrderPostBodyData.COMMENT,
-                        CreateOrderPostBodyData.COLOUR_EMPTY},
+                {
+                        CreateOrderPostBodyData.FIRSTNAME,
+                        CreateOrderPostBodyData.LASTNAME,
+                        CreateOrderPostBodyData.ADDRESS,
+                        CreateOrderPostBodyData.METRO_STATION,
+                        CreateOrderPostBodyData.PHONE,
+                        CreateOrderPostBodyData.RENT_TIME,
+                        CreateOrderPostBodyData.DELIVERY_DATE,
+                        CreateOrderPostBodyData.COMMENT,
+                        CreateOrderPostBodyData.COLOUR_EMPTY
+                },
         };
     }
 
-    @Before
-    public void setUp() {
-        RestAssured.baseURI = CommonData.SITE_ADDRESS;
-    }
 
     @Test
+    @Step("Check create order with different colors")
+    @DisplayName("Check create order with different colors")
     @Description("заказ создается при разных комбинациях цвета")
     public void createOrderWithBlackColourTest() {
-        CreateOrderPostBodyRequestPojo json = new CreateOrderPostBodyRequestPojo(firstName, lastName, address, metroStation,
-                phone, rentTime, deliveryDate, comment, color);
-        assertEquals(SC_CREATED, order.getOrderResponse(json).statusCode());
+        CreateOrderPostBodyRequestPojo json = new CreateOrderPostBodyRequestPojo(
+                firstName,
+                lastName,
+                address,
+                metroStation,
+                phone,
+                rentTime,
+                deliveryDate,
+                comment,
+                color
+        );
+        assertEquals(
+                SC_CREATED,
+                order.getOrderResponse(json, CommonData.CREATE_ORDER_API).statusCode());
     }
 }

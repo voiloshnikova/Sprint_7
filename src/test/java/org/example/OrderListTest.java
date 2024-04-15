@@ -1,8 +1,11 @@
 package org.example;
 
 import io.qameta.allure.Description;
-import io.restassured.RestAssured;
+import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import org.example.data.CommonData;
+import org.example.data.CreateCourierPostBodyData;
+import org.example.data.CreateOrderPostBodyData;
 import org.example.pojo.OrdersListGetBodyResponsePojo;
 import org.junit.After;
 import org.junit.Before;
@@ -15,21 +18,47 @@ public class OrderListTest {
     OrderApi order = new OrderApi();
 
     @Before
+    @Step("Preparing test data")
+    @DisplayName("Preparing test data")
     public void setUp() {
-        RestAssured.baseURI = CommonData.SITE_ADDRESS;
-        courier.createCourier();
+        courier.createCourier(
+                CommonData.CREATE_COURIER_API,
+                CreateCourierPostBodyData.COURIER_LOGIN,
+                CreateCourierPostBodyData.COURIER_PASSWORD,
+                CreateCourierPostBodyData.COURIER_NAME);
     }
 
     @After
+    @Step("Cleaning test data")
+    @DisplayName("Cleaning test data")
     public void deleteCourier() {
-        courier.deleteCourier();
+        courier.deleteCourier(
+                CommonData.LOGIN_COURIER_API,
+                CommonData.CREATE_COURIER_API,
+                CreateCourierPostBodyData.COURIER_LOGIN,
+                CreateCourierPostBodyData.COURIER_PASSWORD);
     }
 
     @Test
-    @Description("Пооверка что при получении списка заказов тело ответа не пустое")
+    @Step("Check list order response not empty")
+    @DisplayName("Check list order response not empty")
+    @Description("Проверка что при получении списка заказов тело ответа не пустое")
     public void checkExistOrdersTest() {
-        assertNotEquals(0, order.getOrderListResponse(order.getOrderJsonWithOneColor())
-                .as(OrdersListGetBodyResponsePojo.class)
-                .getOrders().length);
+        assertNotEquals(
+                0,
+                order.getOrderListResponse(
+                                order.getOrderJsonWithOneColor(
+                                        CreateOrderPostBodyData.FIRSTNAME,
+                                        CreateOrderPostBodyData.LASTNAME,
+                                        CreateOrderPostBodyData.ADDRESS,
+                                        CreateOrderPostBodyData.METRO_STATION,
+                                        CreateOrderPostBodyData.PHONE,
+                                        CreateOrderPostBodyData.RENT_TIME,
+                                        CreateOrderPostBodyData.DELIVERY_DATE,
+                                        CreateOrderPostBodyData.COMMENT,
+                                        CreateOrderPostBodyData.COLOUR_BLACK),
+                                CommonData.ORDER_LIST_API)
+                        .as(OrdersListGetBodyResponsePojo.class)
+                        .getOrders().length);
     }
 }

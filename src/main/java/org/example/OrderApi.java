@@ -1,27 +1,41 @@
 package org.example;
 
 import io.restassured.response.Response;
-import org.example.data.CommonData;
-import org.example.data.CreateOrderPostBodyData;
 import org.example.pojo.CreateOrderPostBodyRequestPojo;
 
 import static io.restassured.RestAssured.given;
+import static org.example.data.CommonData.requestSpec;
 
 public class OrderApi {
 
-    public Response getOrderResponse(CreateOrderPostBodyRequestPojo json) {
-        return given().header("Content-type", "application/json").body(json).when().post(CommonData.CREATE_ORDER_API);
+    public Response getOrderResponse(CreateOrderPostBodyRequestPojo json, String createOrderApi) {
+        return given()
+                .spec(requestSpec)
+                .body(json)
+                .when()
+                .post(createOrderApi);
     }
 
-    public Response getOrderListResponse(CreateOrderPostBodyRequestPojo json) {
-        return given().header("Content-type", "application/json").body(json).when().get(CommonData.ORDER_LIST_API);
+    public Response getOrderListResponse(CreateOrderPostBodyRequestPojo json, String orderListApi) {
+        return given()
+                .spec(requestSpec)
+                .body(json)
+                .when()
+                .get(orderListApi);
     }
 
-    public CreateOrderPostBodyRequestPojo getOrderJsonWithOneColor() {
-        return new CreateOrderPostBodyRequestPojo(CreateOrderPostBodyData.FIRSTNAME, CreateOrderPostBodyData.LASTNAME,
-                CreateOrderPostBodyData.ADDRESS, CreateOrderPostBodyData.METRO_STATION, CreateOrderPostBodyData.PHONE,
-                CreateOrderPostBodyData.RENT_TIME, CreateOrderPostBodyData.DELIVERY_DATE, CreateOrderPostBodyData.COMMENT,
-                CreateOrderPostBodyData.COLOUR_BLACK);
+    public CreateOrderPostBodyRequestPojo getOrderJsonWithOneColor(String firstname, String lastname, String address, String metroStation, String phone, Integer rentTime, String deliveryDate, String comment, String[] colour) {
+        return new CreateOrderPostBodyRequestPojo(
+                firstname,
+                lastname,
+                address,
+                metroStation,
+                phone,
+                rentTime,
+                deliveryDate,
+                comment,
+                colour
+                );
     }
 
 }

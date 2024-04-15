@@ -8,5 +8,5 @@ public class CreateCourierPostBodyData {
     public static final String COURIER_NAME = "Mr. Smith";
     public static final String COURIER_NAME_NEW = "Ms. Smith";
     public static final String EMPTY_STRING = "";
-    public static final String SUCCESS_CREATE_COURIER_MASSAGE = "true";
+    public static final String SUCCESS_CREATE_COURIER_MESSAGE = "true";
 }
