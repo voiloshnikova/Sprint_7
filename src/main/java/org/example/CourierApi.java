@@ -1,5 +1,8 @@
 package org.example;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.example.pojo.CreateCourierPostBodyRequestPojo;
 import org.example.pojo.LoginCourierPostBodyRequestPojo;
@@ -10,6 +13,9 @@ import static org.example.data.CommonData.requestSpec;
 
 public class CourierApi {
 
+    @Step("Authorization Courier")
+    @DisplayName("Authorization Courier")
+    @Description("авторизуемся как курьер")
     public Response getAuthorizationCourierResponse(LoginCourierPostBodyRequestPojo json, String loginCourierApi) {
         return given()
                 .spec(requestSpec)
@@ -17,7 +23,9 @@ public class CourierApi {
                 .when()
                 .post(loginCourierApi);
     }
-
+    @Step("Create Courier")
+    @DisplayName("Create Courier")
+    @Description("создаем курьера")
     public Response getCreateCourierResponse(CreateCourierPostBodyRequestPojo json, String createCourierApi) {
         return given()
                 .spec(requestSpec)
@@ -25,7 +33,9 @@ public class CourierApi {
                 .when()
                 .post(createCourierApi);
     }
-
+    @Step("Create Courier on init")
+    @DisplayName("Create Courier on init")
+    @Description("создаем курьера на этапе инициализации теста")
     public void createCourier(String createCourierApi,
                               String courierLogin,
                               String courierPassword,
@@ -38,7 +48,9 @@ public class CourierApi {
                 .then()
                 .statusCode(201);
     }
-
+    @Step("Delete Courier after test")
+    @DisplayName("Delete Courier after test")
+    @Description("удаляем курьера после теста")
     public void deleteCourier(String loginCourierApi,
                               String createCourierApi,
                               String courierLogin,

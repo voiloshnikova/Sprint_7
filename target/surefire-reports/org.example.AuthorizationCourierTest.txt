@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.example.AuthorizationCourierTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.682 s - in org.example.AuthorizationCourierTest
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.467 s - in org.example.AuthorizationCourierTest
